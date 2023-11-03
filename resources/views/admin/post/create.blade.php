@@ -3,8 +3,6 @@
 | Thêm chủ đề
 @endsection
 @section('css')
-<!-- <link rel="stylesheet" href="{{asset('admins/plugins/sweetalert2-theme-bootstrap-4/bootstrap-4.min.css')}}">
-<link rel="stylesheet" href="{{asset('admins/plugins/toastr/toastr.min.css')}}"> -->
 
 @endsection
 @section('content')
@@ -62,26 +60,5 @@
 </div>
 @endsection
 @section('js')
-<!-- <script src="{{asset('admins/plugins/sweetalert2/sweetalert2.min.js')}}"></script>
-<script src="{{asset('admins/plugins/toastr/toastr.min.js')}}"></script>
 
-<script>
-    $(function() {
-        var Toast = Swal.mixin({
-            toast: true,
-            position: 'top-end',
-            showConfirmButton: false,
-            // timer: 3000
-        });
-        $('.swalDefaultSuccess').click(function() {
-            Toast.fire({
-                icon: 'success',
-                title: 'Thêm thành công',
-                timer: 5000,
-                // showConfirmButton: true,
-                showCloseButton: true,
-            })
-        });
-    });
-</script> -->
 @endsection
