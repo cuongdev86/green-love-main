@@ -1,0 +1,2 @@
+- Phân quyền cho bài viết, khi admin duyệt rồi thì không cho sửa, chỉ cho xóa thôi
+- Admin thì được toàn quyền -> ghi log lại
