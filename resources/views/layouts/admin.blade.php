@@ -39,8 +39,8 @@
     <script src="{{asset('admins/plugins/bootstrap/js/bootstrap.bundle.min.js')}}"></script>
     <script src="http://cdn.bootcss.com/toastr.js/latest/js/toastr.min.js"></script>
     {!! Toastr::message() !!}
-    @yield('js')
     <script src="{{asset('admins/dist/js/adminlte.min.js')}}"></script>
+    @yield('js')
 </body>
 
 </html>

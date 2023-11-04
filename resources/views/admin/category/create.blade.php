@@ -3,9 +3,6 @@
 | Thêm chủ đề
 @endsection
 @section('css')
-<!-- <link rel="stylesheet" href="{{asset('admins/plugins/sweetalert2-theme-bootstrap-4/bootstrap-4.min.css')}}">
-<link rel="stylesheet" href="{{asset('admins/plugins/toastr/toastr.min.css')}}"> -->
-
 @endsection
 @section('content')
 <div class="content-wrapper">
@@ -38,7 +35,7 @@
                                 <div class="row">
                                     <div class="col-12">
                                         <div class="form-group">
-                                            <label for="">Tên chủ đề</label>
+                                            <label for="">Tên chủ đề <span class="text-danger">*</span></label>
                                             <input name="name" type="text" class="form-control" required placeholder="Nhập tên chủ đề">
                                         </div>
                                         <div class="form-group">
@@ -62,26 +59,5 @@
 </div>
 @endsection
 @section('js')
-<!-- <script src="{{asset('admins/plugins/sweetalert2/sweetalert2.min.js')}}"></script>
-<script src="{{asset('admins/plugins/toastr/toastr.min.js')}}"></script>
 
-<script>
-    $(function() {
-        var Toast = Swal.mixin({
-            toast: true,
-            position: 'top-end',
-            showConfirmButton: false,
-            // timer: 3000
-        });
-        $('.swalDefaultSuccess').click(function() {
-            Toast.fire({
-                icon: 'success',
-                title: 'Thêm thành công',
-                timer: 5000,
-                // showConfirmButton: true,
-                showCloseButton: true,
-            })
-        });
-    });
-</script> -->
 @endsection

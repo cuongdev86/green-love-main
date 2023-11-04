@@ -16,4 +16,8 @@ class Audio extends Model
         'category_id', 'name', 'description', 'status', 'user_id', 'admin_id', 'approve_date', 'file_name', 'file_path',
         'slug', 'note_admin'
     ];
+    public function category()
+    {
+        return $this->belongsTo(Category::class, 'category_id', 'id');
+    }
 }

@@ -1,6 +1,6 @@
 @extends('layouts.admin')
 @section('title')
-| Bài viết
+| Video
 @endsection
 @section('css')
 <link rel="stylesheet" href="{{asset('admins/plugins/daterangepicker/daterangepicker.css')}}">
@@ -57,12 +57,12 @@
         <div class="container-fluid">
             <div class="row mb-2">
                 <div class="col-sm-6">
-                    <h1 class="m-0">Bài viết</h1>
+                    <h1 class="m-0">Video</h1>
                 </div>
                 <div class="col-sm-6">
                     <ol class="breadcrumb float-sm-right">
                         <li class="breadcrumb-item"><a href="{{route('dashboard')}}">Trang chủ</a></li>
-                        <li class="breadcrumb-item active">Bài viết</li>
+                        <li class="breadcrumb-item active">Video</li>
                     </ol>
                 </div>
             </div>
@@ -77,12 +77,12 @@
                     <div class="card">
                         <div class="card-header">
                             <h3 class="card-title text-uppercase">Danh sách</h3>
-                            <a class="btn btn-primary float-right" href="{{route('posts.create')}}"><i class="fas fa-plus-circle"></i> Thêm</a>
+                            <a class="btn btn-primary float-right" href="{{route('videos.create')}}"><i class="fas fa-plus-circle"></i> Thêm</a>
                         </div>
                         <div class="card-body">
                             <label for=""> Tìm kiếm</label>
                             <div class="filter">
-                                <form action="{{route('posts.index')}}" method="get">
+                                <form action="{{route('videos.index')}}" method="get">
                                     <div class="row">
                                         <div class="col-4">
                                             <input type="text" value="{{request()->name ? request()->name : null}}" name="name" class="form-control" placeholder="Tìm kiếm tiêu đề...">
@@ -101,9 +101,9 @@
                                         <div class="col-4">
                                             <select name="status" id="status" class="form-control" id="">
                                                 <option value="" {{request()->status == null ? 'selected' : ''}}>Trạng thái</option>
-                                                <option value="{{\App\Enums\PostEnum::PenddingTemp}}" {{request()->status == \App\Enums\PostEnum::PenddingTemp ? 'selected' : ''}}>Đang xử lý</option>
-                                                <option value="{{\App\Enums\PostEnum::Approved}}" {{request()->status == \App\Enums\PostEnum::Approved ? 'selected' : ''}}>Đang hoạt động</option>
-                                                <option value="{{\App\Enums\PostEnum::Cancel}}" {{request()->status == \App\Enums\PostEnum::Cancel ? 'selected' : ''}}>Bị hủy</option>
+                                                <option value="{{\App\Enums\VideoEnum::PenddingTemp}}" {{request()->status == \App\Enums\VideoEnum::PenddingTemp ? 'selected' : ''}}>Đang xử lý</option>
+                                                <option value="{{\App\Enums\PostEnum::Approved}}" {{request()->status == \App\Enums\VideoEnum::Approved ? 'selected' : ''}}>Đang hoạt động</option>
+                                                <option value="{{\App\Enums\PostEnum::Cancel}}" {{request()->status == \App\Enums\VideoEnum::Cancel ? 'selected' : ''}}>Bị hủy</option>
                                             </select>
                                         </div>
                                     </div>
@@ -131,7 +131,7 @@
                                         </div>
                                         <div class="col-4">
                                             <button class="btn btn-submit btn-light" style="background-color: aliceblue"><i class="fas fa-search"></i></button> &nbsp;
-                                            <a href="{{route('posts.index')}}" class="btn btn-light"><i class="fas fa-ban"></i> Bỏ lọc</a>
+                                            <a href="{{route('videos.index')}}" class="btn btn-light"><i class="fas fa-ban"></i> Bỏ lọc</a>
                                         </div>
                                     </div>
                                 </form>
@@ -141,7 +141,7 @@
                                 <thead>
                                     <tr>
                                         <th>STT</th>
-                                        <th>Hình ảnh</th>
+                                        <th>File</th>
                                         <th>Tiêu đề</th>
                                         <th>Chủ đề</th>
                                         <th>Trạng thái</th>
@@ -151,26 +151,31 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    @if(count($posts))
-                                    @foreach($posts as $post)
+                                    @if(count($audios))
+                                    @foreach($audios as $audio)
                                     <tr>
                                         <td>{{$loop->iteration }}</td>
-                                        <td><img src="{{$post->image}}" width="150" alt="Image"></td>
-                                        <td>{{$post->name}}</td>
-                                        <td>{{optional($post->category)->name}}</td>
                                         <td>
-                                            @if($post->status == \App\Enums\PostEnum::Approved)
+                                            <button type="button" onclick="showVideo('{{$audio->file_path}}', '{{$audio->name}}');" class="btn btn-default">
+                                                <i class="fas fa-video"></i> Bấm để xem
+                                            </button>
+
+                                        </td>
+                                        <td>{{$audio->name}}</td>
+                                        <td>{{optional($audio->category)->name}}</td>
+                                        <td>
+                                            @if($audio->status == \App\Enums\AudioEnum::Approved)
                                             <span class="status-active">Đang hoạt động</span>
-                                            @elseif($post->status == \App\Enums\PostEnum::Cancel)
+                                            @elseif($audio->status == \App\Enums\AudioEnum::Cancel)
                                             <span>Bị Hủy</span>
                                             @else
                                             <span class="status-pedding">Đang xử lý</span>
                                             @endif
                                         </td>
-                                        <td>{{$post->updated_at->format('d/m/Y H:i:s')}}</td>
+                                        <td>{{$audio->updated_at->format('d/m/Y H:i:s')}}</td>
                                         <td>
-                                            <a href="{{route('posts.edit', ['id'=>$post->id, 'slug' => $post->slug])}}"><i class="fas fa-edit"></i></a> &nbsp; &nbsp;
-                                            <a onclick="return confirm('Bạn có chắc muốn xóa bài viết này?')" href="{{route('posts.destroy', ['id'=>$post->id])}}"><i class="fas fa-trash-alt icon-delete"></i></a>
+                                            <a href="{{route('videos.edit', ['id'=>$audio->id, 'slug' => $audio->slug])}}"><i class="fas fa-edit"></i></a> &nbsp; &nbsp;
+                                            <a onclick="return confirm('Bạn có chắc muốn xóa?')" href="{{route('videos.destroy', ['id'=>$audio->id])}}"><i class="fas fa-trash-alt icon-delete"></i></a>
                                         </td>
                                     </tr>
                                     @endforeach
@@ -189,6 +194,28 @@
 
         </div>
     </div>
+
+    <div class="modal fade" id="modal-xl">
+        <div class="modal-dialog modal-xl">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title" id="video-title"></h4>
+                    <button type="button" class="close" onclick="closeVideo();" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body" style="width: 100%;max-width: 100vw;height: 100vh;overflow: hidden;">
+                    <video id="video-tag" style=" width: 100%;height: 100%;object-fit: contain;" controls>
+                        <source src="" type="video/mp4">
+                    </video>
+                </div>
+                <div class="modal-footer justify-content-between">
+                    <button type="button" class="btn btn-default" onclick="closeVideo();">Đóng</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
     {{-- end main content --}}
 </div>
 @endsection
@@ -222,6 +249,30 @@
         });
         $('#status').select2();
         $('#category_id').select2();
+
+        // $(document).mouseup(function(e) {
+        //     var modal = $("#modal-xl");
+        //     var video = modal.find("video")[0];
+        //     if (e.target != modal[0] && !modal.has(e.target).length) {
+        //         modal.hide();
+        //         video.pause(); // Dừng video
+        //     }
+        // });
     });
+
+    function showVideo(file_path, name) {
+        $('#video-title').empty();
+        $('#video-title').html(name);
+        var videoElement = $("#video-tag");
+        videoElement.find('source').attr('src', file_path);
+        videoElement[0].load(); // Tải lại video
+        $('#modal-xl').modal('show');
+    }
+
+    function closeVideo() {
+        var videoElement = $("#video-tag");
+        videoElement[0].pause();
+        $('#modal-xl').modal('hide');
+    }
 </script>
 @endsection

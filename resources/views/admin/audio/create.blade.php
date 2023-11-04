@@ -1,6 +1,6 @@
 @extends('layouts.admin')
 @section('title')
-| Thêm bài viết
+| Thêm âm thanh
 @endsection
 @section('css')
 <link rel="stylesheet" href="{{asset('admins/plugins/select2/css/select2.min.css')}}">
@@ -18,12 +18,12 @@
         <div class="container-fluid">
             <div class="row mb-2">
                 <div class="col-sm-6">
-                    <h1 class="m-0">Thêm bài viết</h1>
+                    <h1 class="m-0">Thêm âm thanh</h1>
                 </div>
                 <div class="col-sm-6">
                     <ol class="breadcrumb float-sm-right">
                         <li class="breadcrumb-item"><a href="#">Trang chủ</a></li>
-                        <li class="breadcrumb-item active">Thêm bài viết</li>
+                        <li class="breadcrumb-item active">Thêm âm thanh</li>
                     </ol>
                 </div>
             </div>
@@ -37,7 +37,7 @@
                 <div class="col-12">
                     <div class="card">
                         <div class="card-body">
-                            <form action="{{route('posts.store')}}" method="post" enctype="multipart/form-data">
+                            <form action="{{route('audios.store')}}" method="post" enctype="multipart/form-data">
                                 @csrf
                                 <div class="row">
                                     <div class="col-12">
@@ -51,22 +51,16 @@
                                             </select>
                                         </div>
                                         <div class="form-group">
-                                            <label for="">Tiêu đề <span class="text-danger">*</span></label>
+                                            <label for="">Tên <span class="text-danger">*</span></label>
                                             <input name="name" type="text" class="form-control" required placeholder="Nhập tiêu đề">
                                         </div>
                                         <div class="form-group">
                                             <label for="">Mô tả</label>
-                                            <input name="describe" type="text" class="form-control" placeholder="Nhập tiêu đề">
+                                            <input name="description" type="text" class="form-control" placeholder="Nhập tiêu đề">
                                         </div>
                                         <div class="form-group">
-                                            <label for="">Hình ảnh</label>
-                                            <input name="image" type="file" accept="image/*" class="form-control-file" required onchange="previewImage(event)"> <br>
-                                            <img id="preview" src="" alt="Ảnh xem trước" style="max-width: 300px; max-height: 300px; display: none;">
-                                        </div>
-                                        <div class="form-group">
-                                            <label for="">Nội dung</label>
-                                            <textarea id="summernote" name="content">
-                                            </textarea>
+                                            <label for="">File âm thanh</label>
+                                            <input name="file" type="file" class="form-control-file" required> <br>
                                         </div>
                                     </div>
                                 </div>
@@ -90,26 +84,6 @@
     $(function() {
         $('#category_id').select2();
     });
-
-
-    function previewImage(event) {
-        var input = event.target;
-        var preview = document.getElementById('preview');
-        var file = input.files[0];
-        var reader = new FileReader();
-
-        reader.onload = function() {
-            preview.style.display = 'block'; // Hiển thị thẻ img khi có ảnh được chọn
-            preview.src = reader.result;
-        };
-
-        if (file) {
-            reader.readAsDataURL(file);
-        } else {
-            preview.style.display = 'none'; // Ẩn thẻ img khi không có ảnh được chọn
-            preview.src = "";
-        }
-    }
 </script>
 <!-- Summernote -->
 <script src="{{asset('admins/plugins/summernote/summernote-bs4.min.js')}}"></script>
