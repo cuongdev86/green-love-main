@@ -8,7 +8,8 @@
     <link rel="icon" type="image/png" href="{{asset('admins/dist/img/globe.png')}}">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
     <link rel="stylesheet" href="{{asset('admins/plugins/fontawesome-free/css/all.min.css')}}">
-    <link rel="stylesheet" href="http://cdn.bootcss.com/toastr.js/latest/css/toastr.min.css">
+    <!-- <link rel="stylesheet" href="http://cdn.bootcss.com/toastr.js/latest/css/toastr.min.css"> -->
+    <link rel="stylesheet" href="{{asset('admins/custom-css/toastr.min.css')}}">
     @yield('css')
     <link rel="stylesheet" href="{{asset('admins/dist/css/adminlte.min.css')}}">
     <link rel="stylesheet" href="{{asset('admins/custom-css/style.css')}}">
@@ -37,10 +38,11 @@
 
     <script src="{{asset('admins/plugins/jquery/jquery.min.js')}}"></script>
     <script src="{{asset('admins/plugins/bootstrap/js/bootstrap.bundle.min.js')}}"></script>
-    <script src="http://cdn.bootcss.com/toastr.js/latest/js/toastr.min.js"></script>
+    <!-- <script src="http://cdn.bootcss.com/toastr.js/latest/js/toastr.min.js"></script> -->
+    <script src="{{asset('admins/custom-js/toastr.min.js')}}"></script>
     {!! Toastr::message() !!}
-    @yield('js')
     <script src="{{asset('admins/dist/js/adminlte.min.js')}}"></script>
+    @yield('js')
 </body>
 
 </html>

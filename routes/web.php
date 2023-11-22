@@ -19,6 +19,8 @@ use App\Http\Controllers\Admin\AdminVideoController;
 */
 
 Route::get('/', [AdminDashboardController::class, 'dashboard'])->name('dashboard');
+Route::get('/login', [AdminDashboardController::class, 'login'])->name('dashboard');
+
 Route::prefix('/admin')->group(function () {
     Route::group(['prefix' => 'categories', 'as' => 'categories.'], function () {
         Route::get('/', [AdminCategoryController::class, 'index'])->name('index');
@@ -33,7 +35,7 @@ Route::prefix('/admin')->group(function () {
         Route::get('/create', [AdminPostController::class, 'create'])->name('create');
         Route::post('/store', [AdminPostController::class, 'store'])->name('store');
         Route::get('/edit/{id}/{slug}', [AdminPostController::class, 'edit'])->name('edit');
-        Route::post('/update/{id}/{slug}', [AdminPostController::class, 'update'])->name('update');
+        Route::post('/update/{id}', [AdminPostController::class, 'update'])->name('update');
         Route::get('/destroy/{id}', [AdminPostController::class, 'destroy'])->name('destroy');
     });
     Route::group(['prefix' => 'audios', 'as' => 'audios.'], function () {
@@ -41,7 +43,7 @@ Route::prefix('/admin')->group(function () {
         Route::get('/create', [AdminAudioController::class, 'create'])->name('create');
         Route::post('/store', [AdminAudioController::class, 'store'])->name('store');
         Route::get('/edit/{id}/{slug}', [AdminAudioController::class, 'edit'])->name('edit');
-        Route::post('/update/{id}/{slug}', [AdminAudioController::class, 'update'])->name('update');
+        Route::post('/update/{id}', [AdminAudioController::class, 'update'])->name('update');
         Route::get('/destroy/{id}', [AdminAudioController::class, 'destroy'])->name('destroy');
     });
     Route::group(['prefix' => 'videos', 'as' => 'videos.'], function () {
@@ -49,7 +51,7 @@ Route::prefix('/admin')->group(function () {
         Route::get('/create', [AdminVideoController::class, 'create'])->name('create');
         Route::post('/store', [AdminVideoController::class, 'store'])->name('store');
         Route::get('/edit/{id}/{slug}', [AdminVideoController::class, 'edit'])->name('edit');
-        Route::post('/update/{id}/{slug}', [AdminVideoController::class, 'update'])->name('update');
+        Route::post('/update/{id}', [AdminVideoController::class, 'update'])->name('update');
         Route::get('/destroy/{id}', [AdminVideoController::class, 'destroy'])->name('destroy');
     });
 });

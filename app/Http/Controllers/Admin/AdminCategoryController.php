@@ -39,11 +39,11 @@ class AdminCategoryController extends Controller
                 'description' => $request->desc
             ]);
             DB::commit();
-            toastr()->success('Tạo thành công', 'Thành công!');
+            toastr()->success('Tạo thành công');
             return redirect()->route('categories.index');
         } catch (Exception $e) {
             DB::rollBack();
-            toastr()->error('Tạo thất bại', 'Thông báo!');
+            toastr()->error('Tạo thất bại');
             return redirect()->back();
         }
     }
@@ -78,10 +78,10 @@ class AdminCategoryController extends Controller
                 'name' => $request->name,
                 'description' => $request->desc
             ]);
-            toastr()->success('Cập nhật thành công', 'Thành công!');
+            toastr()->success('Cập nhật thành công');
             return redirect()->route('categories.index');
         } catch (Exception $e) {
-            toastr()->error('Cập nhật thất bại', 'Thông báo!');
+            toastr()->error('Cập nhật thất bại');
             return redirect()->back();
         }
     }
@@ -92,7 +92,7 @@ class AdminCategoryController extends Controller
     public function destroy(string $id)
     {
         Category::find($id)->delete();
-        toastr()->success('Xóa thành công', 'Thành công!');
+        toastr()->success('Xóa thành công');
         return redirect()->back();
     }
 }

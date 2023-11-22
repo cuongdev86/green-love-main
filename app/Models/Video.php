@@ -10,7 +10,7 @@ class Video extends Model
 {
     use HasFactory;
     use SoftDeletes;
-    protected $table = 'audios';
+    protected $table = 'videos';
     protected $primaryKey = 'id';
     protected $fillable = [
         'category_id', 'name', 'description', 'status', 'user_id', 'admin_id', 'approve_date', 'file_name', 'file_path',
